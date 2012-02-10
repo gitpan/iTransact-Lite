@@ -106,6 +106,13 @@ iTransact::Lite - A simple interface to the iTransact payment gateway.
         },
  });
 
+ if ($response->{GatewayInterface}{TransactionResponse}{TransactionResult}{Status} eq 'ok') {
+     say "Success! Transaction ID: ". $response->{GatewayInterface}{TransactionResponse}{TransactionResult}{XID};
+ }
+ else {
+     die $response->{GatewayInterface}{TransactionResponse}{TransactionResult}{ErrorMessage};
+ }
+
 =head1 DESCRIPTION
 
 This module provides a simple wrapper around the iTransact XML Connection API (L<http://www.itransact.com/support/toolkit/xml-connection/api/>). It does the hard work of signing, serializing, and submitting the request for you, but you still have to give it the data the web service API is expecting.
